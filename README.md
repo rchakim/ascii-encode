@@ -52,7 +52,7 @@ lua ascii.lua decode "{72, 101, 108, 108, 111}"  # Outputs: Hello
 ## Conclusion
 This module provides a simple yet robust solution for ASCII encoding and decoding in Lua. It includes comprehensive input validation and supports multiple input formats, making it suitable for various use cases including data processing and encoding tasks.
 
-## >[!Attention]
+## Attention
 - The module strictly validates ASCII ranges (0-255). Any value outside this range will throw an error.
 - When using the command-line interface, ensure proper quoting of arguments, especially when containing spaces or special characters.
 - For file processing, the module only accepts `.txt` files and expects proper formatting for table inputs.
