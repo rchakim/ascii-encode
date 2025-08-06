@@ -66,58 +66,54 @@ ascii.decode = function(code)
 end
 
 -- Command-line interface
-if arg and #arg >= 1 then
+if arg and #arg >= 2 then
 	local command = arg[1]:lower()
 	local input = arg[2]
 	local separator = arg[3] or " "
 	local status, res = pcall(function()
-		if command == "encode" or command == "decode" then
-			-- Check if input is a file (ends with .lua)
-			if input:match("%.txt$") then
-				local file = io.open(input, "r")
-				if not file then
-					error("Failed to open file: " .. input)
-				end
-				local content = file:read("*a")
-				file:close()
+		-- Check if input is a file (ends with .lua)
+		if input:match("%.txt$") then
+			local file = io.open(input, "r")
+			if not file then
+				error("Failed to open file: " .. input)
+			end
+			local content = file:read("*a")
+			file:close()
 
-				if command == "encode" then
-					return ascii.encode(content, separator)
-				elseif command == "decode" then
-					-- Handle potential table input from file
-					if content:match("^%s*{.+}%s*$") then
-						local tbl = load("return " .. content)()
-						if type(tbl) ~= "table" then
-							error("Invalid table format in file")
-						end
-						return ascii.decode(tbl)
-					else
-						return ascii.decode(content)
+			if command == "enc" then
+				return ascii.encode(content, separator)
+			elseif command == "dec" then
+				-- Handle potential table input from file
+				if content:match("^%s*{.+}%s*$") then
+					local tbl = load("return " .. content)()
+					if type(tbl) ~= "table" then
+						error("Invalid table format in file")
 					end
+					return ascii.decode(tbl)
 				else
-					error("Unknown command: " .. command .. ". Use 'encode' or 'decode'")
+					return ascii.decode(content)
 				end
 			else
-				-- Original behavior for non-file input
-				if command == "encode" then
-					return ascii.encode(input, separator)
-				elseif command == "decode" then
-					-- Handle potential table input from command line
-					if input:match("^%s*{.+}%s*$") then
-						local tbl = load("return " .. input)()
-						if type(tbl) ~= "table" then
-							error("Invalid table format")
-						end
-						return ascii.decode(tbl)
-					else
-						return ascii.decode(input)
-					end
-				else
-					error("Unknown command: " .. command .. ". Use 'encode' or 'decode'")
-				end
+				error("Unknown command: " .. command .. ". Use 'encode' or 'decode'")
 			end
 		else
-			error("Unknown command: " .. command .. ". Use 'encode' or 'decode'")
+			-- Original behavior for non-file input
+			if command == "enc" then
+				return ascii.encode(input, separator)
+			elseif command == "dec" then
+				-- Handle potential table input from command line
+				if input:match("^%s*{.+}%s*$") then
+					local tbl = load("return " .. input)()
+					if type(tbl) ~= "table" then
+						error("Invalid table format")
+					end
+					return ascii.decode(tbl)
+				else
+					return ascii.decode(input)
+				end
+			else
+				error("Unknown command: " .. command .. ". Use 'encode' or 'decode'")
+			end
 		end
 	end)
 
