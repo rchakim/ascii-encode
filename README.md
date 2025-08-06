@@ -33,20 +33,20 @@ local decoded = ascii.decode("72 101 108 108 111")  -- Returns "Hello"
 ### Command Line Interface
 The module can be used directly from the command line:
 ```bash
-lua ascii.lua encode "Hello" "-"  # Outputs: 72-101-108-108-111
-lua ascii.lua decode "72 101 108 108 111"  # Outputs: Hello
+lua ascii.lua enc "Hello" "-"  # Outputs: 72-101-108-108-111
+lua ascii.lua dec "72 101 108 108 111"  # Outputs: Hello
 ```
 
 #### File Support
 You can also process text files (`.txt` extension):
 ```bash
-lua ascii.lua encode input.txt ","  # Encodes content of input.txt with comma separator
-lua ascii.lua decode input.txt      # Decodes content of input.txt
+lua ascii.lua enc input.txt ","  # Encodes content of input.txt with comma separator
+lua ascii.lua dec input.txt      # Decodes content of input.txt
 ```
 
 For table input (either from command line or file), use Lua table syntax:
 ```bash
-lua ascii.lua decode "{72, 101, 108, 108, 111}"  # Outputs: Hello
+lua ascii.lua dec "{72, 101, 108, 108, 111}"  # Outputs: Hello
 ```
 
 ## Conclusion
