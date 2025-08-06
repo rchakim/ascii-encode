@@ -94,7 +94,7 @@ if arg and #arg >= 2 then
 					return ascii.decode(content)
 				end
 			else
-				error("Unknown command: " .. command .. ". Use 'encode' or 'decode'")
+				error("Unknown command: " .. command .. ". Use 'enc' or 'dec'")
 			end
 		else
 			-- Original behavior for non-file input
@@ -112,7 +112,7 @@ if arg and #arg >= 2 then
 					return ascii.decode(input)
 				end
 			else
-				error("Unknown command: " .. command .. ". Use 'encode' or 'decode'")
+				error("Unknown command: " .. command .. ". Use 'enc' or 'dec'")
 			end
 		end
 	end)
