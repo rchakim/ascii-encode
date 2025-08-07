@@ -1,11 +1,13 @@
 -- Creator: Alicia Suya Firmansyah
 -- Copyright (c) 2025 Alicia Suya Firmansyah. All rights reserved.
 
+local ascii = {}
+
 --- Encode a string to ASCII values
 -- @param code The input string to encode
 -- @param separator Optional separator for encoded values (defaults to space)
 -- @return String of ASCII values or throws error for invalid input
-local encode = function(code, separator)
+ascii.encode = function(code, separator)
 	-- Validate input type
 	if type(code) ~= "string" then
 		error("Input must be a string, got " .. type(code), 2)
@@ -28,4 +30,4 @@ local encode = function(code, separator)
 	return table.concat(tbl, separator)
 end
 
-return {encode}
+return ascii

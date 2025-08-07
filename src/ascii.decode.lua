@@ -1,10 +1,12 @@
 -- Creator: Alicia Suya Firmansyah
 -- Copyright (c) 2025 Alicia Suya Firmansyah. All rights reserved.
 
+local ascii = {}
+
 --- Decode ASCII values to a string
 -- @param code String of space-separated ASCII values or table of numbers
 -- @return Decoded string or throws error for invalid input
-local decode = function(code)
+ascii.decode = function(code)
 	if not code then
 		return ""
 	end
@@ -36,4 +38,4 @@ local decode = function(code)
 	return res
 end
 
-return {decode}
+return ascii
