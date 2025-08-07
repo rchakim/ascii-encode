@@ -1,61 +1,94 @@
-# ASCII Encoder/Decoder Module
+# ASCII Encoder/Decoder
 
-## Overview
-This Lua module provides functions to encode strings to ASCII values and decode ASCII values back to strings. It supports both command-line usage and integration into other Lua projects. The module handles validation of input values to ensure they fall within the valid ASCII range (0-255).
+A JavaScript and Lua implementation for encoding strings to ASCII values and decoding ASCII values back to strings.
+
+## Features
+
+- **Encode**: Convert any string to its ASCII representation with customizable separator
+- **Decode**: Convert ASCII values (as string or array/table) back to the original string
+- **Input Validation**: Thorough error checking for invalid inputs
+- **File Support**: Process text files directly (`.txt` extension)
+- **Cross-Platform**: Works in both Node.js and browser environments (JavaScript version)
+- **Command Line Interface**: Easy to use from terminal/command prompt
 
 ## Installation
-1. Download the `ascii.lua` file from the repository:
-   ```bash
-   git clone https://github.com/rchakim/ascii-encode.git
-   cd ascii-encode
-   ```
 
-2. Alternatively, you can download the file directly from GitHub and place it in your project directory.
+### JavaScript Version
+```bash
+npm install ascii-encoder-decoder
+```
+Or include directly in your HTML:
+```html
+<script src="ascii.js"></script>
+```
 
-3. To use the module in your Lua project, simply require it:
-   ```lua
-   local ascii = require("ascii")
-   ```
+### Lua Version
+Simply require the file in your Lua project:
+```lua
+local ascii = require("ascii")
+```
 
 ## Usage
 
-### As a Module
+### JavaScript API
+
+**Encoding:**
+```javascript
+ascii.encode("Hello", "-"); // Returns "72-101-108-108-111"
+```
+
+**Decoding:**
+```javascript
+ascii.decode("72 101 108 108 111"); // Returns "Hello"
+ascii.decode([72, 101, 108, 108, 111]); // Returns "Hello"
+```
+
+### Lua API
+
+**Encoding:**
 ```lua
-local ascii = require("ascii")
+ascii.encode("Hello", "-") -- Returns "72-101-108-108-111"
+```
 
--- Encoding a string to ASCII values
-local encoded = ascii.encode("Hello", "-")  -- Returns "72-101-108-108-111"
-
--- Decoding ASCII values to a string
-local decoded = ascii.decode("72 101 108 108 111")  -- Returns "Hello"
+**Decoding:**
+```lua
+ascii.decode("72 101 108 108 111") -- Returns "Hello"
+ascii.decode({72, 101, 108, 108, 111}) -- Returns "Hello"
 ```
 
 ### Command Line Interface
-The module can be used directly from the command line:
+
+**JavaScript (Node.js):**
 ```bash
-lua ascii.lua enc "Hello" "-"  # Outputs: 72-101-108-108-111
-lua ascii.lua dec "72 101 108 108 111"  # Outputs: Hello
+node ascii.js enc "Hello" "-"  # Encodes with hyphen separator
+node ascii.js dec "72-101-108-108-111"  # Decodes with hyphen separator
+node ascii.js enc input.txt  # Encodes content of input.txt
 ```
 
-#### File Support
-You can also process text files (`.txt` extension):
+**Lua:**
 ```bash
-lua ascii.lua enc input.txt ","  # Encodes content of input.txt with comma separator
-lua ascii.lua dec input.txt      # Decodes content of input.txt
+lua ascii.lua encode "Hello" "-"  # Encodes with hyphen separator
+lua ascii.lua decode "72-101-108-108-111"  # Decodes with hyphen separator
+lua ascii.lua encode input.txt  # Encodes content of input.txt
 ```
 
-For table input (either from command line or file), use Lua table syntax:
-```bash
-lua ascii.lua dec "{72, 101, 108, 108, 111}"  # Outputs: Hello
-```
+## Error Handling
 
-## Conclusion
-This module provides a simple yet robust solution for ASCII encoding and decoding in Lua. It includes comprehensive input validation and supports multiple input formats, making it suitable for various use cases including data processing and encoding tasks.
+Both implementations provide detailed error messages for:
+- Non-string inputs for encoding
+- Invalid ASCII values (outside 0-255 range)
+- Malformed input arrays/tables
+- File access errors
+- Invalid commands
 
-## Attention
-- The module strictly validates ASCII ranges (0-255). Any value outside this range will throw an error.
-- When using the command-line interface, ensure proper quoting of arguments, especially when containing spaces or special characters.
-- For file processing, the module only accepts `.txt` files and expects proper formatting for table inputs.
-- The `load()` function is used for table parsing - be cautious when processing untrusted input.
+## License
 
-### Happy Coding 🎉
+Copyright (c) 2025 Alicia Suya Firmansyah. All rights reserved.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Support
+
+For issues or questions, please open an issue on the GitHub repository.
