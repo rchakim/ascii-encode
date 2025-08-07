@@ -1,10 +1,11 @@
-# ASCII Encoder/Decoder
+# ASCII Encoder/Decoder Library
 
-A cross-platform utility for encoding strings to ASCII values and decoding ASCII values back to strings, available in both JavaScript (Node.js and browser) and Lua implementations.
+A cross-language library for encoding strings to ASCII codes and decoding ASCII codes back to strings. Available in JavaScript (Node.js/browser), Lua, and Python.
 
 ## Installation
 
-Clone the repository:
+Clone the repository from GitHub:
+
 ```bash
 git clone https://github.com/rchakim/ascii-encode.git
 cd ascii-encode
@@ -12,89 +13,105 @@ cd ascii-encode
 
 ## Usage
 
-### JavaScript Version
+### JavaScript (Node.js)
 
-#### In Node.js
-
-**As a Module:**
 ```javascript
 const ascii = require('./ascii.js');
 
 // Encoding
-const encoded = ascii.encode("Hello", "-"); // Returns "72-101-108-108-111"
+const encoded = ascii.encode("Hello", "-"); // "72-101-108-108-111"
 
 // Decoding
-const decoded = ascii.decode("72 101 108 108 111"); // Returns "Hello"
-const decodedFromArray = ascii.decode([72, 101, 108, 108, 111]); // Returns "Hello"
+const decoded = ascii.decode("72 101 108 108 111"); // "Hello"
 ```
 
-**Command Line Interface:**
+#### Command Line (Node.js):
+
 ```bash
-# Encode a string
-node ascii.js enc "Hello" "-"
-
-# Decode ASCII values
-node ascii.js dec "72 101 108 108 111"
-
-# Encode from a file
-node ascii.js enc input.txt
-
-# Decode from a file
-node ascii.js dec input.txt
+node ascii.js enc "Hello" "-"  # Output: 72-101-108-108-111
+node ascii.js dec "72 101 108 108 111"  # Output: Hello
 ```
 
-#### In Browser
+### JavaScript (Browser)
 
 Include the script in your HTML:
+
 ```html
 <script src="ascii.js"></script>
 <script>
   // Encoding
-  const encoded = ascii.encode("Hello", "-"); // Returns "72-101-108-108-111"
+  const encoded = ascii.encode("Hello", ","); // "72,101,108,108,111"
   
   // Decoding
-  const decoded = ascii.decode("72 101 108 108 111"); // Returns "Hello"
-  const decodedFromArray = ascii.decode([72, 101, 108, 108, 111]); // Returns "Hello"
+  const decoded = ascii.decode("72,101,108,108,111"); // "Hello"
 </script>
 ```
 
-### Lua Version
+### Lua
 
-**As a Module:**
 ```lua
 local ascii = require('ascii')
 
 -- Encoding
-local encoded = ascii.encode("Hello", "-") -- Returns "72-101-108-108-111"
+local encoded = ascii.encode("Hello", ".") -- "72.101.108.108.111"
 
 -- Decoding
-local decoded = ascii.decode("72 101 108 108 111") -- Returns "Hello"
-local decodedFromTable = ascii.decode({72, 101, 108, 108, 111}) -- Returns "Hello"
+local decoded = ascii.decode("72 101 108 108 111") -- "Hello"
 ```
 
-**Command Line Interface:**
+#### Command Line (Lua):
+
 ```bash
-# Encode a string
-lua ascii.lua encode "Hello" "-"
+lua ascii.lua enc "Hello" "."  # Output: 72.101.108.108.111
+lua ascii.lua dec "72 101 108 108 111"  # Output: Hello
+```
 
-# Decode ASCII values
-lua ascii.lua decode "72 101 108 108 111"
+### Python
 
-# Encode from a file
-lua ascii.lua encode input.txt
+```python
+from ascii import ASCII
 
-# Decode from a file
-lua ascii.lua decode input.txt
+# Encoding
+encoded = ASCII.encode("Hello", " ")  # "72 101 108 108 111"
+
+# Decoding
+decoded = ASCII.decode("72 101 108 108 111")  # "Hello"
+```
+
+#### Command Line (Python):
+
+```bash
+python ascii.py enc "Hello" "_"  # Output: 72_101_108_108_111
+python ascii.py dec "72 101 108 108 111"  # Output: Hello
+```
+
+## File Processing
+
+All implementations support processing text files (`.txt`):
+
+```bash
+# Encoding a file
+node ascii.js enc input.txt ","
+
+# Decoding a file
+python ascii.py dec encoded.txt
 ```
 
 ## Features
 
-- **String Encoding**: Convert any string to its ASCII values with customizable separators
-- **Value Decoding**: Convert ASCII values (as strings or arrays/tables) back to the original string
-- **Cross-Platform**: Works in Node.js, browsers, and Lua environments
-- **File Support**: Process text files directly from command line
-- **Error Handling**: Comprehensive validation and error messages
-- **Unicode Safety**: Ensures all characters are within valid ASCII range (0-255)
+- Encode strings to ASCII codes with custom separators
+- Decode ASCII codes back to strings
+- Support for both string and array/list/table inputs
+- File processing capabilities
+- Input validation and error handling
+- Cross-language consistency
+
+## Notes
+
+1. ASCII range is strictly enforced (0-255)
+2. Default separator is space (" ")
+3. Empty strings return empty strings
+4. Invalid inputs throw appropriate errors
 
 ## License
 
