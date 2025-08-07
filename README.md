@@ -1,94 +1,154 @@
 # ASCII Encoder/Decoder
 
-A JavaScript and Lua implementation for encoding strings to ASCII values and decoding ASCII values back to strings.
+A simple utility to encode strings to ASCII codes and decode ASCII codes back to strings, available in both JavaScript and Lua implementations.
 
 ## Features
 
-- **Encode**: Convert any string to its ASCII representation with customizable separator
-- **Decode**: Convert ASCII values (as string or array/table) back to the original string
-- **Input Validation**: Thorough error checking for invalid inputs
-- **File Support**: Process text files directly (`.txt` extension)
-- **Cross-Platform**: Works in both Node.js and browser environments (JavaScript version)
-- **Command Line Interface**: Easy to use from terminal/command prompt
+- Encode strings to ASCII codes with customizable separators
+- Decode ASCII codes (as strings or arrays/tables) back to original strings
+- Command-line interface for both Node.js and Lua
+- Input validation and error handling
+- Support for both direct input and file processing
 
 ## Installation
 
-### JavaScript Version
+### JavaScript/Node.js Version
+
+1. Clone the repository:
 ```bash
-npm install ascii-encoder-decoder
+git clone https://github.com/rchakim/ascii-encode.git
+cd ascii-encode
 ```
-Or include directly in your HTML:
-```html
-<script src="ascii.js"></script>
+
+2. Install dependencies (none required for basic usage)
+
+3. Use the script:
+```bash
+node ascii.js [command] [input] [separator]
 ```
 
 ### Lua Version
-Simply require the file in your Lua project:
-```lua
-local ascii = require("ascii")
+
+1. Clone the repository:
+```bash
+git clone https://github.com/rchakim/ascii-encode.git
+cd ascii-encode
+```
+
+2. Ensure you have Lua installed on your system
+
+3. Use the script:
+```bash
+lua ascii.lua [command] [input] [separator]
 ```
 
 ## Usage
 
+### Command Line Interface
+
+#### Encoding
+```bash
+# JavaScript version
+node ascii.js enc "Hello World" ","
+# Output: 72,101,108,108,111,32,87,111,114,108,100
+
+# Lua version
+lua ascii.lua encode "Hello World" ","
+# Output: 72,101,108,108,111,32,87,111,114,108,100
+```
+
+#### Decoding
+```bash
+# JavaScript version
+node ascii.js dec "72 101 108 108 111 32 87 111 114 108 100"
+# Output: Hello World
+
+# Lua version
+lua ascii.lua decode "72 101 108 108 111 32 87 111 114 108 100"
+# Output: Hello World
+```
+
+#### File Processing
+```bash
+# JavaScript version
+node ascii.js enc input.txt ","
+node ascii.js dec encoded.txt
+
+# Lua version
+lua ascii.lua encode input.txt ","
+lua ascii.lua decode encoded.txt
+```
+
+### Programmatic Usage
+
+#### JavaScript
+```javascript
+const ascii = require('./ascii.js');
+
+// Encoding
+const encoded = ascii.encode("Hello", "-");
+console.log(encoded); // "72-101-108-108-111"
+
+// Decoding
+const decoded = ascii.decode("72 101 108 108 111");
+console.log(decoded); // "Hello"
+```
+
+#### Lua
+```lua
+local ascii = require('ascii')
+
+-- Encoding
+local encoded = ascii.encode("Hello", "-")
+print(encoded) -- "72-101-108-108-111"
+
+-- Decoding
+local decoded = ascii.decode("72 101 108 108 111")
+print(decoded) -- "Hello"
+```
+
+## API Documentation
+
 ### JavaScript API
 
-**Encoding:**
-```javascript
-ascii.encode("Hello", "-"); // Returns "72-101-108-108-111"
-```
+#### `ascii.encode(code, separator)`
+- `code`: String to encode (required)
+- `separator`: Separator between ASCII codes (default: " ")
+- Returns: String of ASCII codes separated by specified separator
+- Throws: Error if input is invalid or contains non-ASCII characters
 
-**Decoding:**
-```javascript
-ascii.decode("72 101 108 108 111"); // Returns "Hello"
-ascii.decode([72, 101, 108, 108, 111]); // Returns "Hello"
-```
+#### `ascii.decode(code)`
+- `code`: Can be either:
+  - String of ASCII codes separated by non-digit characters
+  - Array of numbers representing ASCII codes
+- Returns: Decoded string
+- Throws: Error if input is invalid or contains values outside 0-255 range
 
 ### Lua API
 
-**Encoding:**
-```lua
-ascii.encode("Hello", "-") -- Returns "72-101-108-108-111"
-```
+#### `ascii.encode(code, separator)`
+- `code`: String to encode (required)
+- `separator`: Separator between ASCII codes (default: " ")
+- Returns: String of ASCII codes separated by specified separator
+- Throws: Error if input is invalid or contains non-ASCII characters
 
-**Decoding:**
-```lua
-ascii.decode("72 101 108 108 111") -- Returns "Hello"
-ascii.decode({72, 101, 108, 108, 111}) -- Returns "Hello"
-```
-
-### Command Line Interface
-
-**JavaScript (Node.js):**
-```bash
-node ascii.js enc "Hello" "-"  # Encodes with hyphen separator
-node ascii.js dec "72-101-108-108-111"  # Decodes with hyphen separator
-node ascii.js enc input.txt  # Encodes content of input.txt
-```
-
-**Lua:**
-```bash
-lua ascii.lua encode "Hello" "-"  # Encodes with hyphen separator
-lua ascii.lua decode "72-101-108-108-111"  # Decodes with hyphen separator
-lua ascii.lua encode input.txt  # Encodes content of input.txt
-```
+#### `ascii.decode(code)`
+- `code`: Can be either:
+  - String of ASCII codes separated by non-digit characters
+  - Table of numbers representing ASCII codes
+- Returns: Decoded string
+- Throws: Error if input is invalid or contains values outside 0-255 range
 
 ## Error Handling
 
 Both implementations provide detailed error messages for:
-- Non-string inputs for encoding
-- Invalid ASCII values (outside 0-255 range)
-- Malformed input arrays/tables
+- Invalid input types
+- ASCII values outside the valid range (0-255)
 - File access errors
-- Invalid commands
+- Malformed array/table inputs
 
 ## License
 
-Copyright (c) 2025 Alicia Suya Firmansyah. All rights reserved.
+Free and open source for all cases.
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## Support
-
-For issues or questions, please open an issue on the GitHub repository.
+This project is licensed under the MIT License.
